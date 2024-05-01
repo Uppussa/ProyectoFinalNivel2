@@ -13,7 +13,7 @@ export const getPublicacion = async (req, res) => {
 // Filtrar publicaciones por categoría
 export const filterCategory = async (req, res) => {
   try {
-    const categoriaId = req.params.categoriaId
+    const categoriaId = req.params.categoriaId // Corregir el nombre del parámetro
     const query = 'SELECT * FROM publicaciones P INNER JOIN publicaciones_categorias pc ON p.id = pc.publicacion_id INNER JOIN categorias c ON c.id = pc.categoria_id WHERE c.id = ?'
     const [results] = await pool.query(query, [categoriaId]) // Corregir la consulta para usar el parámetro de categoríaId
 
