@@ -12,13 +12,13 @@ export const admin = async (req, res) => {
 
 export const newAccount = async (req, res) => {
   try {
-    const { nombre, email, contraseña: password, rol } = req.body
+    const { nombre, email, contraseña: password, rol_id: rolId } = req.body
 
-    if (!nombre || !email || !password || !rol) {
+    if (!nombre || !email || !password || !rolId) {
       return res.status(400).json({ message: 'Datos faltantes' })
     }
 
-    await pool.execute('INSERT INTO usuarios(nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)', [nombre, email, password, rol])
+    await pool.execute('INSERT INTO usuarios(nombre, email, contraseña, rol_id) VALUES (?, ?, ?, ?)', [nombre, email, password, rolId])
     res.status(201).json({ message: 'Usuario creado' })
   } catch (error) {
     res.status(500).json({ message: 'hubo un error interno', details: error.message })
