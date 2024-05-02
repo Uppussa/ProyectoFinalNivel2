@@ -69,7 +69,7 @@ export const getPublicationsByCategory = async (req, res) => {
       }
 
       // Consulta SQL para obtener las publicaciones asociadas a la categoría específica
-      const [publicaciones] = await pool.query(`
+      const [publicaciones] = await pool.execute(`
         SELECT p.id, p.titulo, p.contenido, GROUP_CONCAT(c.nombre) AS categorias
         FROM publicaciones p
         LEFT JOIN publicaciones_categorias pc ON p.id = pc.publicacion_id
