@@ -28,9 +28,9 @@ export const filterTitle = async (req, res) => {
   try {
     const title = req.params.name // Corregir el nombre del parámetro
     const query = 'SELECT * FROM publicaciones p INNER JOIN publicaciones_categorias pc ON p.id = pc.publicacion_id INNER JOIN categorias c ON c.id = pc.categoria_id WHERE p.titulo = ?'
-
+    console.log(title)
     const [results] = await pool.execute(query, [title])
-
+    console.log(results)
     if (results.length === 0) { // Verificar si no se encontraron resultados
       return res.status(404).json({ message: 'No se encontraron publicaciones con el título proporcionado' })
     }
