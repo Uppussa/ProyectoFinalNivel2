@@ -1,36 +1,50 @@
-FUNCIONES
+FUNCIONES rutas
 
-Gestion de cuentas : 
-1. registrarse en la plataforma (crearse un perfil)
-2. actualizar sus datos personales 
-3. eliminar sus cuenta
+Gestion de cuentas : usuarios
+router.get('/admin', permission, admin)
+router.post('/newAccount', newAccount)
+router.put('/update/:id', update)
+router.delete('/delete/:id', remove)
 
 Gestion de publicaciones:
-1. Crear nuevas publicaciones
-2. Actualizar sus propias publicaciones
-3. Eliminar sus propias publicaciones
-4. Ver sus propias publicaciones y las de otros usuarios, ver todas la publicaciones
-5. Filtrar las publicaciones por categorías
-6. Buscar publicaciones por título
+obtener publicaciones
+router.get('/publicaciones', getPublicacion)
+obtener filtrar  por categoria
+router.get('/publicaciones/categorias/:categoriaId', filterCategory)
+obtener  filtrar por titulo
+router.get('/publicaciones/title/:name', filterTitle)
+ruta para crear publicacion
+router.post('/publicaciones', createPublication)
+ruta para actualizar publicacion
+router.put('/publicaciones/:id', updatePublication)
+ruta para borror publicacion
+router.delete('/publicaciones/:id', deletePublication)
 
 Gestion de comentarios:
-1. Comentar en las publicacione
-2. Actualizar sus propios comentarios
-3. Eliminar sus propios comentarios
+para  crear el comentario en la publicacion  "usuario_id": 2, "publicacion_id": 4, "comentario": "que fue", "fecha_creacion": "2024-04-27 08:35:05"
+router.post('/publicaciones/comentario', crearComentario)
+para actualizar es  "comentario": "", "fecha_creacion": "0000-00-00 00:00:00"
+router.put('/comentario/:id', updateComment)
+para eleminar el comentario
+router.delete('/comentario/:id', deleteComment)
+Los comentarios solo serán visibles a través de la publicación a la que pertenecen.
+router.get('/publicaciones/:id/comentarios', getCommentsForPost)
 
 
 FUNCIONES DEL ADMINISTRADOR
 
-Gestion de cuentas:
-(TODAS LAS DEL USUARIO)
-4. Ver todos los usuarios registrados en la plataforma
-
-Gestion de publicaciones:
-(TODAS LAS DEL USUARIO)
-
-Gestion de comentarios:
-(TOAS LAS DEL USUARIO)
 
 Gestion de categorías:
 1. El administrador tendrá acceso completo para crear, leer, actualizar y eliminar categorías (CRUD).
 2. EL administrador podra ingresar con id: 1  cuando se le sea requerido
+
+Ruta para ver las categorias hacer el llamado para tener acceso con eje: id: 1, es admin
+router.get('/categorias', permission, indexCategory)
+Ruta para crear categorias hacer el llamado para tener acceso con eje: id: 1, es admin + nombre:
+router.post('/categorias/create', permission, createCategory)
+Ruta para Actualizar las categorias, hacer el llamado id: 1, es admin + nombre:
+router.put('/categorias/update/:id', permission, updateCategory)
+Ruta para Eliminar las categorias, hacer el llamado para tener acceso con id: 1, es admin
+router.delete('/categorias/:id', permission, deleteCategory)
+Ruta para Eliminar las publicaciones por categorias
+router.get('/publicaciones/categorias/:id', permission, getPublicationsByCategory)
