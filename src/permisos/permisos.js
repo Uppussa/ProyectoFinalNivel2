@@ -4,7 +4,7 @@ export const permission = async (req, res, next) => {
 
     // Verificar si el ID proporcionado es 1
     if (id !== 1) {
-      return res.status(403).json({ message: 'No permitido' })
+      return res.status(403).json({ message: 'No permitido no es el administrador' })
     }
 
     // Si el ID es 1, continuar con la creación de la categoría
